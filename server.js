@@ -19,5 +19,5 @@ let db = fireAdmin.firestore();
 
 
 app.listen(process.env.PORT || 9000, () => {
-  console.log("server is running");
+  console.log("server is running"cd gorecce-admin);
 });
