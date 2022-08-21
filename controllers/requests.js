@@ -13,16 +13,17 @@ sgMail.setApiKey(SENDGRID_API);
 
 const deleteUser = async (req, res) => {
     try {
-        const data=await db.collection("users").doc(req.params.id).get(email);
-        const emailData = {
-            from: EMAIL_FROM,
-            to: "saketmundra2707@gmail.com",
-            subject: "Account Deactivated",
-            html: ` <p style=text-align:center;>Your Account has been Deactivated</p>
-                  <hr />`,
-          };
-        await sgMail.send(emailData);
+        // const data=await db.collection("users").doc(req.params.id).get(email);
+        // const emailData = {
+        //     from: EMAIL_FROM,
+        //     to: "saketmundra2707@gmail.com",
+        //     subject: "Account Deactivated",
+        //     html: ` <p style=text-align:center;>Your Account has been Deactivated</p>
+        //           <hr />`,
+        //   };
+        // await sgMail.send(emailData);
         await db.collection("users").doc(req.params.id).delete();
+        await db.collection("requests").doc(req.params.id).delete();
         return res.status(200).send("User Deleted");
     } catch (error) {
         return res.status(400).json(error);
