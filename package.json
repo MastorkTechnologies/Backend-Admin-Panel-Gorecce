@@ -13,6 +13,10 @@
     "firebase-admin": "^11.0.1",
     "nodemon": "^2.0.19"
   },
+  "engines": {
+    "npm": "8.1.2",
+    "node": "v16.13.1"
+  },
   "name": "adminback",
   "version": "1.0.0",
   "devDependencies": {},
