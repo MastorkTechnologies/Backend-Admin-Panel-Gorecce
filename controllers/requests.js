@@ -6,8 +6,8 @@ const {
     EMAIL_FROM,
     SENDGRID_API,
     EMAIL,
-  } = require("../config/dev");
-  const sgMail = require("@sendgrid/mail");
+} = require("../config/dev");
+const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(SENDGRID_API);
 
@@ -29,10 +29,19 @@ const deleteUser = async (req, res) => {
         return res.status(400).json(error);
     }
 }
-const deleteReq=async(req,res)=>{
+const rejectdeac = async (req, res) => {
     try {
-        const data=await db.collection("requests").get();
-        res.send(data.docs.map(doc => doc.data())) ;   
+        await db.collection("requests").doc(req.params.id).delete();
+        return res.status(200).send("Request Rejected");
+    } catch (error) {
+        return res.status(400).json(error);
+
+    }
+}
+const deleteReq = async (req, res) => {
+    try {
+        const data = await db.collection("requests").get();
+        res.send(data.docs.map(doc => doc.data()));
     } catch (error) {
         return res.status(400).json(error);
     }
@@ -43,5 +52,5 @@ const deleteReq=async(req,res)=>{
 
 
 module.exports = {
-    deleteUser,deleteReq
+    deleteUser, deleteReq,rejectdeac
 };
